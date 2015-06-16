@@ -10,9 +10,37 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var label = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let btn = UIButton(frame: self.view.bounds)
+        btn.setTitle("show modal", forState: UIControlState.Normal)
+        btn.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        btn.addTarget(self, action:"push", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(btn)
+        
+        label.frame = CGRectMake(0, 0, self.view.frame.width, 300)
+        label.textAlignment = NSTextAlignment.Center
+        label.text = "▼ press show modal button▼ "
+        self.view.addSubview(label)
+    }
+    
+    func push(){
+        let vc = DCAlertController(title: "test title", message: "message")
+        vc.setConfirmAction { (controlelr) -> Void in
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                print("confirm!!")
+                self.label.text = "confirm"
+            })
+        }
+        vc.setCancelAction { (controlelr) -> Void in
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                self.label.text = "cancel"
+                print("cancel!!")
+            })
+        }
+        presentViewController(vc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
