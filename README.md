@@ -6,6 +6,7 @@ Alert like Android wear
 Auto Confirm Alert written in Swift like android wear.
 
 ## Easy to use.
+```swift
 let vc = DCAlertController(title: "test title", message: "message")
 vc.setConfirmAction { (controlelr) -> Void in
   self.dismissViewControllerAnimated(true, completion: { () -> Void in
